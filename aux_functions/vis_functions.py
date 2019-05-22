@@ -1,7 +1,11 @@
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 
 def plot_random(X, Y, xcol, title_col, nplots = 9, ncols = 3, sample_rate = 125):
+    '''
+    Function to random plot signals
+    '''
     rnd_samples = np.random.choice(np.arange(X.shape[1] - 1), nplots)
     
     fig, axes = plt.subplots(nrows=np.int32(np.ceil(nplots/ncols)),
@@ -13,7 +17,7 @@ def plot_random(X, Y, xcol, title_col, nplots = 9, ncols = 3, sample_rate = 125)
         yvals = X.iloc[:, idx]
         xvals = np.arange(yvals.shape[0]) * (1/sample_rate)
         ax.plot(xvals, yvals)
-        ax.legend().remove()
+#         ax.legend().remove()
 #         X.plot(x = xcol, y = idx, kind = "line", ax = ax, legend = False)
         ax.set_title("".join([str(idx),": ", Y.loc[idx, title_col]]))
         ax.set_xlabel("time(s)")
