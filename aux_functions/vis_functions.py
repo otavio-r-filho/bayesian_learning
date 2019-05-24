@@ -39,8 +39,8 @@ def plot_fanalysis(X, Y, xcol, title_col, nplots = 1, sample_rate = 360):
     
     for idx, ax in zip(rnd_samples, axes):
         raw_signal = X.loc[:, idx]
-        signal_fft = fft(raw_signal)
-        signal_freq = fftfreq(signal_fft.shape[-1], d = 1 / sample_rate)
+        signal_fft = fft(raw_signal, n = 187)
+        signal_freq = fftfreq(signal_fft.shape[-1])
         signal_time = np.arange(raw_signal.shape[0]) * (1/sample_rate)
         
         ax[0].plot(signal_time, raw_signal)
@@ -51,7 +51,7 @@ def plot_fanalysis(X, Y, xcol, title_col, nplots = 1, sample_rate = 360):
         ax[1].set_title("".join([Y.loc[idx, title_col], " Wave FFT"]))
         ax[1].set_xlabel("norm. freq.")
         
-        ax[2].specgram(raw_signal, Fs = sample_rate, NFFT = 40)
+        ax[2].specgram(raw_signal, Fs = sample_rate)
         ax[2].set_title("".join([Y.loc[idx, title_col], " Wave Spectrogram"]))
         ax[2].set_xlabel("time(s)")
     
